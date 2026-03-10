@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mastering FB Ads Academy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#0A0A0B',
+            fg: '#FAFAFA',
+            muted: '#8A8A8E',
+            accent: '#FF5722',
+            accentLight: '#FF8A50',
+            card: '#141416',
+            border: '#2A2A2E',
+            success: '#00C853',
+          },
+          fontFamily: {
+            display: ['Space Grotesk', 'sans-serif'],
+            body: ['DM Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      overflow-x: hidden;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+    .stagger-5 { transition-delay: 0.5s; }
+
+    .pulse-ring {
+      animation: pulseRing 2s ease-out infinite;
+    }
+
+    @keyframes pulseRing {
+      0% { transform: scale(0.8); opacity: 1; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
+
+    .float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .shimmer {
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #FF5722 0%, #FF8A50 50%, #FFB74D 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .bg-noise {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+    }
+
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(255, 87, 34, 0.4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .count-up {
+      display: inline-block;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .float, .pulse-ring, .shimmer {
+        animation: none;
+      }
+    }
+
+    .sticky-cta {
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sticky-cta.visible {
+      transform: translateY(0);
+    }
+
+    .btn-no-underline {
+      text-decoration: none !important;
+    }
+
+    .btn-no-underline:hover,
+    .btn-no-underline:focus,
+    .btn-no-underline:active {
+      text-decoration: none !important;
+    }
+  </style>
+</head>
+<body class="bg-bg text-fg font-body antialiased">
+  
+  <!-- Background Elements -->
+  <div class="fixed inset-0 pointer-events-none">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[150px]"></div>
+    <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-accentLight/3 rounded-full blur-[120px]"></div>
+    <div class="absolute inset-0 bg-noise"></div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="w-full relative z-10">
+    
+    <!-- HERO SECTION -->
+    <section class="w-full min-h-screen py-16 px-4 flex flex-col justify-center relative overflow-hidden">
+      <div class="absolute top-10 right-10 w-32 h-32 border border-accent/20 rounded-full float"></div>
+      <div class="absolute bottom-20 left-10 w-20 h-20 border border-accentLight/20 rounded-full float" style="animation-delay: -2s;"></div>
+      
+      <div class="max-w-2xl mx-auto text-center">
+        <!-- Badge -->
+        <div class="reveal inline-flex items-center gap-2 bg-accent/10 border border-accent/30 rounded-full px-4 py-2 mb-8">
+          <span class="relative flex h-2 w-2">
+            <span class="pulse-ring absolute inline-flex h-full w-full rounded-full bg-accent"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+          </span>
+          <span class="text-accent text-sm font-medium">Sisa Slot Tersedia: <span class="font-bold count-up" data-target="23">23</span></span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="reveal stagger-1 font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
+          Udah Jutaan Rupiah<br>
+          <span class="gradient-text">Kebakar di FB Ads?</span>
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="reveal stagger-2 text-lg sm:text-xl text-muted mb-8 max-w-lg mx-auto">
+          Stop jadi ATM-nya Mark Zuckerberg. Kuasai strategi iklang yang benar-benar menghasilkan, bukan cuma buang budget.
+        </p>
+
+        <!-- Hero CTA -->
+        <div class="reveal stagger-3 flex flex-col gap-4 mb-12">
+          <a href="#pricing" class="btn-primary btn-no-underline inline-flex items-center justify-center gap-3 bg-accent text-white font-bold text-lg px-8 py-4 rounded-xl !important">
+            <span class="!text-white">Mulai Dari Rp499.000</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+          <p class="text-sm text-muted">
+            <svg class="w-4 h-4 inline mr-1 text-success" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            2.847+ advertiser sudah bergabung
+          </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="reveal stagger-4 relative">
+          <div class="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent z-10"></div>
+          <img src="https://placehold.co/600x400/1a1a1c/ffffff?text=Dashboard+Results" alt="FB Ads Dashboard" class="w-full rounded-2xl border border-border shadow-2xl">
+          <!-- Floating Stats -->
+          <div class="absolute -right-4 top-1/4 bg-card border border-border rounded-xl p-4 shadow-xl float hidden sm:block">
+            <p class="text-xs text-muted">ROAS</p>
+            <p class="text-2xl font-bold text-success">4.8x</p>
+          </div>
+          <div class="absolute -left-4 bottom-1/4 bg-card border border-border rounded-xl p-4 shadow-xl float" style="animation-delay: -3s;">
+            <p class="text-xs text-muted">CPA Turun</p>
+            <p class="text-2xl font-bold text-accent">-67%</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEFORE SECTION (Problem) -->
+    <section class="w-full py-16 px-4 bg-card/50">
+      <div class="max-w-2xl mx-auto">
+        <div class="reveal text-center mb-12">
+          <span class="text-accent font-medium text-sm uppercase tracking-wider">Before</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold mt-2">
+            Apakah Ini Yang Kamu Rasakan?
+          </h2>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Pain Points -->
+          <div class="reveal stagger-1 card-hover bg-bg border border-border rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg mb-1">Budget Terbang Tanpa Hasil</h3>
+                <p class="text-muted">Setiap hari cek Ads Manager, yang keluar cuma angka merah. USD jebol, tapi penjualan? Nol besar.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal stagger-2 card-hover bg-bg border border-border rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg mb-1">Bingung Baca Data</h3>
+                <p class="text-muted">CTR, CPC, CPM, ROAS... Semua singkatan aneh. Mana yang harus difokusin? Mana yang bener-bener penting?</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal stagger-3 card-hover bg-bg border border-border rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg mb-1">Iklan Ditolak Terus</h3>
+                <p class="text-muted">Sudah capai, penjualan belum ada yang masuk. Ads Manager kayak musuh yang ga bisa dilawan.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal stagger-4 card-hover bg-bg border border-border rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg mb-1">Kompetitor Malah Maju</h3>
+                <p class="text-muted">Iklan mereka muncul terus di feed. Brand awareness bagus. Sementara kamu? Kayak ga ada di radar calon pembeli.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal stagger-5 mt-8 text-center">
+          <p class="text-lg text-muted italic">
+            "Kamu bukan satu-satunya yang ngerasain ini. Tapi yang membedakan adalah..."
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AFTER SECTION (Transformation) -->
+    <section class="w-full py-16 px-4 relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent to-transparent"></div>
+      
+      <div class="max-w-2xl mx-auto">
+        <div class="reveal text-center mb-12">
+          <span class="text-success font-medium text-sm uppercase tracking-wider">After</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold mt-2">
+            Bayangkan Kalau Bisa Seperti Ini...
+          </h2>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Transformation Points -->
+          <div class="reveal stagger-1 card-hover bg-gradient-to-r from-success/5 to-transparent border border-success/20 rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-success/10 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg mb-1">Setiap Rupiah Terhitung</h3>
+                <p class="text-muted">ROI jelas terukur. Setiap 1 juta yang kamu keluarkan, bisa kembali 3-5x lipat. Bukan tebakan, tapi data yang bisa dibuktikan.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal stagger-2 card-hover bg-gradient-to-r from-success/5 to-transparent border border-success/20 rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-success/10 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg mb-1">Baca Data Kayak Baca Koran</h3>
+                <p class="text-muted">Ads Manager jadi teman, bukan musuh. Kamu tahu persis mana campaign yang harus dimatiin, mana yang harus di-scale.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal stagger-3 card-hover bg-gradient-to-r from-success/5 to-transparent border border-success/20 rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-success/10 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg mb-1">Leads & Sales Mengalir</h3>
+                <p class="text-muted">Notifikasi penjualan masuk tiap hari. Bukan leads murahan, tapi calon pembeli yang benar-benar interested.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal stagger-4 card-hover bg-gradient-to-r from-success/5 to-transparent border border-success/20 rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-success/10 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg mb-1">Waktu Lebih Produktif</h3>
+                <p class="text-muted">Bukan 24 jam di depan laptop. Cukup 1-2 jam sehari untuk monitoring & optimasi. Sisanya? Fokus ke hal lain yang lebih penting.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRIDGE SECTION (Solution) -->
+    <section class="w-full py-16 px-4 bg-card/50">
+      <div class="max-w-2xl mx-auto text-center">
+        <div class="reveal">
+          <span class="text-accent font-medium text-sm uppercase tracking-wider">The Bridge</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold mt-2 mb-4">
+            Introducing
+          </h2>
+          <h3 class="font-display text-4xl sm:text-5xl font-bold gradient-text mb-6">
+            Mastering FB Ads Academy
+          </h3>
+          <p class="text-lg text-muted max-w-lg mx-auto mb-8">
+            Program training lengkap yang akan mengubah kamu dari "boncos parah" jadi "advertiser yang menguasai data".
+          </p>
+        </div>
+
+        <!-- Course Image -->
+        <div class="reveal stagger-1 mb-12">
+          <img src="https://placehold.co/600x350/141416/FF5722?text=Course+Preview" alt="Course Preview" class="w-full rounded-2xl border border-border shadow-2xl">
+        </div>
+
+        <!-- Key Features -->
+        <div class="reveal stagger-2 grid gap-4 text-left">
+          <div class="flex items-center gap-4 bg-bg border border-border rounded-xl p-5 card-hover">
+            <div class="flex-shrink-0 w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-bold">40+ Video Training</h4>
+              <p class="text-sm text-muted">Step-by-step dari nol sampai mahir. Praktis, langsung bisa diaplikasikan.</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 bg-bg border border-border rounded-xl p-5 card-hover">
+            <div class="flex-shrink-0 w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-bold">Template Siap Pakai</h4>
+              <p class="text-sm text-muted">Copy-paste template ads, script copywriting, dan checklist campaign.</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 bg-bg border border-border rounded-xl p-5 card-hover">
+            <div class="flex-shrink-0 w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-bold">Private Community</h4>
+              <p class="text-sm text-muted">Grup eksklusif untuk sharing, tanya jawab, dan networking sesama advertiser.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOCIAL PROOF -->
+    <section class="w-full py-16 px-4">
+      <div class="max-w-2xl mx-auto">
+        <div class="reveal text-center mb-10">
+          <h2 class="font-display text-2xl sm:text-3xl font-bold">
+            Dipercaya 2.847+ Advertiser Indonesia
+          </h2>
+        </div>
+
+        <!-- Stats -->
+        <div class="reveal stagger-1 flex flex-wrap justify-center gap-6 mb-10">
+          <div class="bg-card border border-border rounded-xl p-6 text-center min-w-[140px]">
+            <p class="text-3xl font-bold text-accent">2.847+</p>
+            <p class="text-sm text-muted">Member Aktif</p>
+          </div>
+          <div class="bg-card border border-border rounded-xl p-6 text-center min-w-[140px]">
+            <p class="text-3xl font-bold text-accent">4.9/5</p>
+            <p class="text-sm text-muted">Rating Kepuasan</p>
+          </div>
+          <div class="bg-card border border-border rounded-xl p-6 text-center min-w-[140px]">
+            <p class="text-3xl font-bold text-accent">15+</p>
+            <p class="text-sm text-muted">Modul Training</p>
+          </div>
+        </div>
+
+        <!-- Logos -->
+        <div class="reveal stagger-2 bg-card/50 border border-border rounded-xl p-6">
+          <p class="text-center text-sm text-muted mb-4">Alumni bekerja di berbagai industri:</p>
+          <div class="flex flex-wrap justify-center gap-4 opacity-60">
+            <div class="bg-bg rounded-lg px-4 py-2 text-sm font-medium">E-Commerce</div>
+            <div class="bg-bg rounded-lg px-4 py-2 text-sm font-medium">Property</div>
+            <div class="bg-bg rounded-lg px-4 py-2 text-sm font-medium">F&B</div>
+            <div class="bg-bg rounded-lg px-4 py-2 text-sm font-medium">Fashion</div>
+            <div class="bg-bg rounded-lg px-4 py-2 text-sm font-medium">Education</div>
+            <div class="bg-bg rounded-lg px-4 py-2 text-sm font-medium">Agency</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="w-full py-16 px-4 bg-card/50">
+      <div class="max-w-2xl mx-auto">
+        <div class="reveal text-center mb-10">
+          <h2 class="font-display text-2xl sm:text-3xl font-bold">
+            Apa Kata Member Kami
+          </h2>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Testimonial 1 -->
+          <div class="reveal stagger-1 bg-bg border border-border rounded-xl p-6 card-hover">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center font-bold text-accent">
+                RD
+              </div>
+              <div>
+                <p class="font-bold">Rizki Darmawan</p>
+                <p class="text-sm text-muted">Owner Fashion Brand</p>
+              </div>
+              <div class="ml-auto flex gap-1">
+                <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              </div>
+            </div>
+            <p class="text-muted italic">
+              "Sebelumnya udah 8 juta kebakar di FB Ads tanpa hasil. Setelah ikut program ini, dalam 2 bulan pertama udah balik modal dan sekarang ROAS stabil di 3-4x. Penjelasannya praktis banget, ga pake teori yang membingungkan."
+            </p>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="reveal stagger-2 bg-bg border border-border rounded-xl p-6 card-hover">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center font-bold text-accent">
+                AS
+              </div>
+              <div>
+                <p class="font-bold">Anita Sari</p>
+                <p class="text-sm text-muted">Freelance Advertiser</p>
+              </div>
+              <div class="ml-auto flex gap-1">
+                <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              </div>
+            </div>
+            <p class="text-muted italic">
+              "Dulu takut banget handle iklan client karena ga paham metrik. Sekarang justru bisa kasih report yang bikin client impressed. Fee jasa naik 3x lipat dalam 6 bulan!"
+            </p>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="reveal stagger-3 bg-bg border border-border rounded-xl p-6 card-hover">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center font-bold text-accent">
+                BW
+              </div>
+              <div>
+                <p class="font-bold">Budi Wibowo</p>
+                <p class="text-sm text-muted">Co-Founder Startup</p>
+              </div>
+              <div class="ml-auto flex gap-1">
+                <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              </div>
+            </div>
+            <p class="text-muted italic">
+              "Acquisition cost kami turun 60% setelah apply framework dari program ini. Yang paling valuable adalah cara bacanya dashboard - sekarang tau persis action apa yang harus diambil."
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CURRICULUM / TIMELINE -->
+    <section class="w-full py-16 px-4">
+      <div class="max-w-2xl mx-auto">
+        <div class="reveal text-center mb-10">
+          <h2 class="font-display text-2xl sm:text-3xl font-bold mb-2">
+            Apa Saja Yang Akan Kamu Pelajari?
+          </h2>
+          <p class="text-muted">Kurikulum terstruktur dari dasar sampai advanced</p>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Module 1 -->
+          <div class="reveal stagger-1 card-hover bg-card border border-border rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-accent rounded-xl flex items-center justify-center font-bold text-white">
+                01
+              </div>
+              <div>
+                <h4 class="font-bold text-lg">Foundation & Mindset</h4>
+                <p class="text-sm text-muted mb-2">4 Video | 45 Menit</p>
+                <p class="text-muted">Pahami fundamental FB Ads, algoritma iklan, dan cara kerja auction system. Mindset yang benar sebelum mulai campaign.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Module 2 -->
+          <div class="reveal stagger-2 card-hover bg-card border border-border rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-accent rounded-xl flex items-center justify-center font-bold text-white">
+                02
+              </div>
+              <div>
+                <h4 class="font-bold text-lg">Audience Research & Targeting</h4>
+                <p class="text-sm text-muted mb-2">6 Video | 1 Jam</p>
+                <p class="text-muted">Cara menemukan audiens yang tepat, riset kompetitor, dan membuat customer avatar yang akurat.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Module 3 -->
+          <div class="reveal stagger-3 card-hover bg-card border border-border rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-accent rounded-xl flex items-center justify-center font-bold text-white">
+                03
+              </div>
+              <div>
+                <h4 class="font-bold text-lg">Creative & Copywriting</h4>
+                <p class="text-sm text-muted mb-2">8 Video | 1.5 Jam</p>
+                <p class="text-muted">Buat iklan yang convert: desain visual yang eye-catching dan copy yang menyentuh pain point audiens.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Module 4 -->
+          <div class="reveal stagger-4 card-hover bg-card border border-border rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-accent rounded-xl flex items-center justify-center font-bold text-white">
+                04
+              </div>
+              <div>
+                <h4 class="font-bold text-lg">Campaign Setup & Optimization</h4>
+                <p class="text-sm text-muted mb-2">10 Video | 2 Jam</p>
+                <p class="text-muted">Step-by-step setup campaign, A/B testing, scaling strategy, dan optimasi harian yang efektif.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Module 5 -->
+          <div class="reveal stagger-5 card-hover bg-card border border-border rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-accent rounded-xl flex items-center justify-center font-bold text-white">
+                05
+              </div>
+              <div>
+                <h4 class="font-bold text-lg">Analytics & Reporting</h4>
+                <p class="text-sm text-muted mb-2">6 Video | 1 Jam</p>
+                <p class="text-muted">Baca data seperti pro: metrik penting, membuat report, dan decision-making berbasis data.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPARISON -->
+    <section class="w-full py-16 px-4 bg-card/50">
+      <div class="max-w-2xl mx-auto">
+        <div class="reveal text-center mb-10">
+          <h2 class="font-display text-2xl sm:text-3xl font-bold">
+            Bandingkan Sendiri
+          </h2>
+        </div>
+
+        <div class="reveal stagger-1 grid gap-4">
+          <!-- Without -->
+          <div class="bg-bg border border-red-500/30 rounded-xl p-6">
+            <p class="text-red-400 font-bold mb-4">Tanpa Program Ini</p>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3 text-muted">
+                <svg class="w-5 h-5 text-red-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                Trial error sendiri, budget terbuang
+              </li>
+              <li class="flex items-center gap-3 text-muted">
+                <svg class="w-5 h-5 text-red-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                Bingung baca data & metrik
+              </li>
+              <li class="flex items-center gap-3 text-muted">
+                <svg class="w-5 h-5 text-red-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                Iklan sering ditolak tanpa tahu salahnya
+              </li>
+              <li class="flex items-center gap-3 text-muted">
+                <svg class="w-5 h-5 text-red-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                Kompetitor makin jauh di depan
+              </li>
+            </ul>
+          </div>
+
+          <!-- With -->
+          <div class="bg-gradient-to-br from-accent/10 to-transparent border border-accent/30 rounded-xl p-6">
+            <p class="text-accent font-bold mb-4">Dengan Program Ini</p>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                Framework teruji, langsung praktis
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                Paham baca data & ambil keputusan
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                Template & checklist siap pakai
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                ROI terukur & konsisten
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BONUS SECTION -->
+    <section class="w-full py-16 px-4">
+      <div class="max-w-2xl mx-auto">
+        <div class="reveal text-center mb-10">
+          <span class="text-accent font-medium text-sm uppercase tracking-wider">Exclusive Bonus</span>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold mt-2">
+            Bonus Spesial Untuk Kamu
+          </h2>
+          <p class="text-muted mt-2">Hanya untuk 50 pendaftar pertama</p>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Bonus 1 -->
+          <div class="reveal stagger-1 card-hover bg-card border border-accent/20 rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center">
+                <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs text-accent font-medium mb-1">Nilai: Rp750.000</p>
+                <h4 class="font-bold text-lg">Template Ads Siap Pakai</h4>
+                <p class="text-sm text-muted">50+ template design iklan untuk berbagai industri. Tinggal edit teks & gambar, langsung tayang!</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bonus 2 -->
+          <div class="reveal stagger-2 card-hover bg-card border border-accent/20 rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center">
+                <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs text-accent font-medium mb-1">Nilai: Rp500.000</p>
+                <h4 class="font-bold text-lg">Script Copywriting Library</h4>
+                <p class="text-sm text-muted">100+ script headline & body copy yang terbukti convert. Cocok untuk berbagai tipe produk & jasa.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bonus 3 -->
+          <div class="reveal stagger-3 card-hover bg-card border border-accent/20 rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center">
+                <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs text-accent font-medium mb-1">Nilai: Rp350.000</p>
+                <h4 class="font-bold text-lg">Tools & Resources List</h4>
+                <p class="text-sm text-muted">Kompilasi tools gratis & berbayar untuk riset, design, tracking, dan optimasi. Hemat waktu cari tools sendiri.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bonus 4 -->
+          <div class="reveal stagger-4 card-hover bg-card border border-accent/20 rounded-xl p-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center">
+                <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs text-accent font-medium mb-1">Nilai: Rp600.000</p>
+                <h4 class="font-bold text-lg">Private Community Access</h4>
+                <p class="text-sm text-muted">Grup eksklusif untuk tanya jawab, sharing, dan networking dengan sesama advertiser. Lifetime akses!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total Bonus Value -->
+        <div class="reveal stagger-5 mt-8 bg-gradient-to-r from-accent/10 to-transparent border border-accent/30 rounded-xl p-6 text-center">
+          <p class="text-muted mb-2">Total Nilai Bonus</p>
+          <p class="text-3xl font-bold text-accent">Rp2.200.000</p>
+          <p class="text-sm text-muted mt-2">GRATIS untuk pendaftar hari ini</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- OBJECTION HANDLING -->
+    <section class="w-full py-16 px-4 bg-card/50">
+      <div class="max-w-2xl mx-auto">
+        <div class="reveal text-center mb-10">
+          <h2 class="font-display text-2xl sm:text-3xl font-bold">
+            Masih Ada Keraguan?
+          </h2>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Objection 1 -->
+          <details class="reveal stagger-1 group bg-bg border border-border rounded-xl overflow-hidden">
+            <summary class="flex items-center justify-between p-6 cursor-pointer">
+              <span class="font-bold pr-4">Lama banget nonton videonya?</span>
+              <svg class="w-5 h-5 text-muted group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 text-muted">
+              <p>Videonya didesain chunked, durasi 5-15 menit per video. Kamu bisa nonton sambil rebahan, di waktu senggang, atau commuting. Plus, lifetime akses jadi ga perlu buru-buru. Belajar di pace kamu sendiri.</p>
+            </div>
+          </details>
+
+          <!-- Objection 2 -->
+          <details class="reveal stagger-2 group bg-bg border border-border rounded-xl overflow-hidden">
+            <summary class="flex items-center justify-between p-6 cursor-pointer">
+              <span class="font-bold pr-4">Apakah cocok untuk pemula?</span>
+              <svg class="w-5 h-5 text-muted group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 text-muted">
+              <p>100% cocok! Modul pertama khusus membahas foundation & mindset untuk pemula. Tidak ada asumsi bahwa kamu sudah paham teknis. Semua dijelaskan dari nah dengan bahasa yang mudah dipahami.</p>
+            </div>
+          </details>
+
+          <!-- Objection 3 -->
+          <details class="reveal stagger-3 group bg-bg border border-border rounded-xl overflow-hidden">
+            <summary class="flex items-center justify-between p-6 cursor-pointer">
+              <span class="font-bold pr-4">Beda sama kursus lain yang mana?</span>
+              <svg class="w-5 h-5 text-muted group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 text-muted">
+              <p>Kursus ini fokus praktis, bukan teori. Setiap video langsung bisa diaplikasikan. Plus, ada template & checklist siap pakai yang akan menghemat waktu eksperimen kamu. Hasilnya? Cepat dibanding trial error sendiri.</p>
+            </div>
+          </details>
+
+          <!-- Objection 4 -->
+          <details class="reveal stagger-4 group bg-bg border border-border rounded-xl overflow-hidden">
+            <summary class="flex items-center justify-between p-6 cursor-pointer">
+              <span class="font-bold pr-4">Bagaimana kalau ga ada waktu?</span>
+              <svg class="w-5 h-5 text-muted group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 text-muted">
+              <p>Dengan lifetime akses, kamu bisa belajar kapanpun. Cukup 15-30 menit sehari, dalam 2 minggu kamu sudah bisa setup campaign pertama. Yang penting konsisten, bukan cepat-cepat.</p>
+            </div>
+          </details>
+
+          <!-- Objection 5 -->
+          <details class="reveal stagger-5 group bg-bg border border-border rounded-xl overflow-hidden">
+            <summary class="flex items-center justify-between p-6 cursor-pointer">
+              <span class="font-bold pr-4">Update materi gimana?</span>
+              <svg class="w-5 h-5 text-muted group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 text-muted">
+              <p>Setiap ada update fitur FB Ads atau strategi baru, materi akan di-update. Kamu akan dapat notifikasi dan akses ke materi terbaru tanpa biaya tambahan. Lifetime update!</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUARANTEE -->
+    <section class="w-full py-16 px-4">
+      <div class="max-w-2xl mx-auto">
+        <div class="reveal bg-gradient-to-br from-success/10 to-transparent border border-success/30 rounded-2xl p-8 text-center">
+          <div class="w-20 h-20 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-10 h-10 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-2xl font-bold mb-4">Garansi 7 Hari</h3>
+          <p class="text-muted max-w-md mx-auto">
+            Jika dalam 7 hari kamu merasa program ini tidak memberikan value yang dijanjikan, kami akan kembalikan 100% pembayaranmu. Tanpa pertanyaan, tanpa ribet.
+          </p>
+          <div class="mt-6 inline-flex items-center gap-2 text-success">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span class="font-medium">Risk-free untuk kamu</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="w-full py-16 px-4 bg-card/50 relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent"></div>
+      
+      <div class="max-w-2xl mx-auto relative">
+        <div class="reveal text-center mb-10">
+          <span class="text-accent font-medium text-sm uppercase tracking-wider">Investasi</span>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold mt-2">
+            Mulai Perjalananmu Sekarang
+          </h2>
+        </div>
+
+        <!-- Pricing Card -->
+        <div class="reveal stagger-1 bg-bg border-2 border-accent rounded-2xl p-8 relative overflow-hidden">
+          <!-- Badge -->
+          <div class="absolute top-0 right-0 bg-accent text-white text-xs font-bold px-4 py-2 rounded-bl-xl">
+            BEST VALUE
+          </div>
+
+          <!-- Scarcity -->
+          <div class="bg-accent/10 border border-accent/30 rounded-xl p-4 mb-6 text-center">
+            <div class="flex items-center justify-center gap-2 mb-2">
+              <span class="relative flex h-3 w-3">
+                <span class="pulse-ring absolute inline-flex h-full w-full rounded-full bg-accent"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-accent"></span>
+              </span>
+              <span class="text-accent font-bold">Sisa Slot: <span class="count-up" data-target="23">23</span></span>
+            </div>
+            <p class="text-xs text-muted">Harga akan naik setelah kuota tercapai</p>
+          </div>
+
+          <!-- Price -->
+          <div class="text-center mb-6">
+            <p class="text-muted line-through text-lg">Rp1.500.000</p>
+            <div class="flex items-baseline justify-center gap-2">
+              <span class="text-5xl font-bold">Rp499.000</span>
+            </div>
+            <p class="text-sm text-muted mt-2">Pembayaran sekali, akses selamanya</p>
+          </div>
+
+          <!-- Value Stack -->
+          <div class="space-y-3 mb-8">
+            <div class="flex items-center justify-between py-2 border-b border-border">
+              <span class="text-muted">Full Program Access (40+ video)</span>
+              <span class="font-medium">Rp1.500.000</span>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-border">
+              <span class="text-muted">Template Ads</span>
+              <span class="font-medium">Rp750.000</span>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-border">
+              <span class="text-muted">Script Copywriting</span>
+              <span class="font-medium">Rp500.000</span>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-border">
+              <span class="text-muted">Tools & Resources</span>
+              <span class="font-medium">Rp350.000</span>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-border">
+              <span class="text-muted">Private Community</span>
+              <span class="font-medium">Rp600.000</span>
+            </div>
+            <div class="flex items-center justify-between py-2">
+              <span class="font-bold">Total Value</span>
+              <span class="font-bold text-accent">Rp3.700.000</span>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <a href="#" class="btn-primary btn-no-underline w-full inline-flex items-center justify-center gap-3 bg-accent text-white font-bold text-lg px-8 py-5 rounded-xl !important shimmer">
+            <span class="!text-white">Beli Sekarang - Rp499.000</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+
+          <!-- Trust Elements -->
+          <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-muted">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>Garansi 7 hari</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>Lifetime akses</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>Secure payment</span>
+            </div>
+          </div>
+
+          <!-- Micro-copy Trust -->
+          <p class="mt-4 text-center text-xs text-muted">
+            Sudah dipercaya 2.847+ advertiser di seluruh Indonesia. Bergabung sekarang dan mulai hasilkan ROI yang terukur.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="w-full py-20 px-4 text-center">
+      <div class="max-w-2xl mx-auto">
+        <div class="reveal">
+          <h2 class="font-display text-3xl sm:text-4xl font-bold mb-6">
+            Masih Mau Terus <span class="gradient-text">Kebakar Budget?</h2>
+          <p class="text-lg text-muted mb-8 max-w-lg mx-auto">
+            Atau kamu siap untuk berubah dan mulai menguasai FB Ads dengan cara yang benar? Pilihan ada di tanganmu.
+          </p>
+          <a href="#pricing" class="btn-primary btn-no-underline inline-flex items-center justify-center gap-3 bg-accent text-white font-bold text-lg px-10 py-5 rounded-xl !important">
+            <span class="!text-white">Ya, Saya Mau Berubah</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- COPYRIGHT -->
+    <section class="w-full py-8 px-4 border-t border-border">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="text-sm text-muted">
+          &copy; 2024 Mastering FB Ads Academy. All rights reserved.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- STICKY CTA MOBILE -->
+  <div class="sticky-cta fixed bottom-0 left-0 right-0 bg-bg/95 backdrop-blur-lg border-t border-border p-4 z-50 lg:hidden">
+    <div class="flex items-center gap-3">
+      <div class="flex-1">
+        <p class="text-xs text-muted">Harga Spesial</p>
+        <div class="flex items-baseline gap-2">
+          <span class="text-sm line-through text-muted">Rp1.500.000</span>
+          <span class="text-xl font-bold text-accent">Rp499.000</span>
+        </div>
+      </div>
+      <a href="#pricing" class="btn-no-underline flex-shrink-0 bg-accent text-white font-bold px-6 py-3 rounded-xl !important">
+        <span class="!text-white">Beli Sekarang</span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Scroll Reveal
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Sticky CTA visibility
+    const stickyCTA = document.querySelector('.sticky-cta');
+    let lastScrollY = 0;
+    let ticking = false;
+
+    function updateStickyCTA() {
+      const scrollY = window.scrollY;
+      
+      if (scrollY > 500) {
+        stickyCTA.classList.add('visible');
+      } else {
+        stickyCTA.classList.remove('visible');
+      }
+      
+      lastScrollY = scrollY;
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateStickyCTA);
+        ticking = true;
+      }
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Count up animation
+    function animateCountUp() {
+      const countElements = document.querySelectorAll('.count-up');
+      
+      countElements.forEach(el => {
+        const target = parseInt(el.getAttribute('data-target'));
+        const duration = 1500;
+        const start = 0;
+        const startTime = performance.now();
+        
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+          const current = Math.floor(easeOutQuart * (target - start) + start);
+          
+          el.textContent = current;
+          
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          }
+        }
+        
+        requestAnimationFrame(update);
+      });
+    }
+
+    // Trigger count up when visible
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCountUp();
+          countObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.count-up').forEach(el => {
+      countObserver.observe(el);
+    });
+
+    // Prefers reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.reveal').forEach(el => {
+        el.classList.add('visible');
+      });
+    }
+  </script>
+</body>
+</html>
